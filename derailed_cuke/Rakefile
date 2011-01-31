@@ -1,0 +1,19 @@
+begin
+	require 'rake'
+	require 'rubygems'
+	require 'cucumber'
+	require 'cucumber/rake/task'
+	require 'rspec/expectations';
+rescue  LoadError => excpn
+	dependenC = excpn.message.split.last
+	puts "You don't seem to have #{dependenC} gem."
+	puts "Try `gem bundle` or `gem install #{dependenC}` to install it."
+	exit 2
+end
+
+task :default => 'features'
+
+Cucumber::Rake::Task.new(:features) do |t|
+	t.cucumber_opts = "--format pretty"
+end
+
