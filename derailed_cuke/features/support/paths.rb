@@ -11,6 +11,8 @@ module NavigationHelpers
 ##ABK:# Service Specifc URLs to be used in respective Tests
     when /the Google Search\s?portal/
 	'https://www.google.com'
+    when /the Twitter\s?portal/
+       'http://www.twitter.com'
 #END::#ABK:# Service Specifc URLs to be used in respective Tests
 
 
