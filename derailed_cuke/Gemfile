@@ -1,8 +1,8 @@
 source "http://rubygems.org"
 
 #group(:test) do
-	gem 'cucumber'
-	gem 'akephalos'
-	gem 'capybara'
-	gem 'rspec'
+  gem 'cucumber'
+  gem 'akephalos'
+  gem 'capybara'
+  gem 'rspec'
 #end
