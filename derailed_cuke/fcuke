@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+DERAILED_CUKE_LOG=${DERAILED_CUKE_LOG:-false}
+LOGS_DIR="logs"
+
+prepare-gecko(){
+  [[ $(which geckodriver > /dev/null ; echo $?) -ne 0 ]] && \
+    echo "download & extract geckdriver to a binary path from https://github.com/mozilla/geckodriver/releases" && \
+    exit 123
+}
+
+bib(){
+        bundle config set --local path '.bundle'
+        bundle install
+}
+
+run-cuke(){
+    prepare-gecko
+    if [[ "DERAILED_CUKE_LOG" == "true" ]]; then
+      mkdir "${LOGS_DIR}"
+      rm -f "${LOGS_DIR}/*"
+    fi
+    bib
+    echo "[derailed cuke]"
+    for feature in features/*.feature; do
+      local log_file="${LOGS_DIR}/${feature}.log"
+      echo "[+] testing feature: ${feature}"
+      echo "******************************************************************"
+      echo ""
+      if [[ "DERAILED_CUKE_LOG" == "true" ]]; then
+        echo "[+] testing feature: ${feature}" >> "${log_file}"
+        bundle exec rake features FEATURE=${feature} --trace | tee -a "${log_file}"
+        echo "******************************************************************" | tee -a "${log_file}"
+      else
+        bundle exec rake features FEATURE=${feature} --trace
+      fi
+      echo "******************************************************************"
+    done
+    [[ "DERAILED_CUKE_LOG" == "true" ]] && echo "Cuke logs can be viewed at ./log dir"
+}
+
+
+## __main__
+run-cuke
