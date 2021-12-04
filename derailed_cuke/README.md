@@ -22,12 +22,12 @@
 > * "paths.rb" in "./features/support/"
 > * and so on
 
->  So, the "./features" directory in here is supposed to contain entire Cucumber generated structure
+>  the "./features" directory in here is supposed to contain entire Cucumber generated structure
 
 
-* Execute "Fcuke.rb", it will run cucumber tests for all features and store the output in "twrak.log".
+* execute `fcuke`, it will run cucumber tests for all features and store the output under `./log`
 
-> On every execution of 'Fcuke.rb", the earlier log gets wiped off.
+> on every execution of `fcuke`, the earlier log gets wiped off.
 
 ---
 
